@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=3 uid="uid://bqrekrucoblsp"]
+
+[ext_resource type="Script" uid="uid://wy7vtpkatgjx" path="res://scripts/player/player_movement.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://cbsdup0jpvjk7" path="res://scripts/player/player.gd" id="1_qhqgy"]
+[ext_resource type="Resource" uid="uid://m6so55rwfaio" path="res://resources/movement_params/normal_movement.tres" id="2_qhqgy"]
+[ext_resource type="Script" uid="uid://byeuv1i152oey" path="res://scripts/player/player_input_process.gd" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://bbj3ctwmn2kbm" path="res://scripts/player/pick_move.gd" id="4_dqkch"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h3xc6"]
+
+[sub_resource type="Gradient" id="Gradient_s36qc"]
+colors = PackedColorArray(0, 0.50980395, 0, 1, 0, 0.50980395, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6qxox"]
+gradient = SubResource("Gradient_s36qc")
+width = 20
+height = 20
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("input_handler", "movement_handler", "pick_handler")]
+script = ExtResource("1_qhqgy")
+input_handler = NodePath("PlayerInputProcessor")
+movement_handler = NodePath("PlayerMovement")
+pick_handler = NodePath("PickMoveHandler")
+default_params = ExtResource("2_qhqgy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_h3xc6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_6qxox")
+
+[node name="PlayerInputProcessor" type="Node" parent="."]
+script = ExtResource("3_qhqgy")
+metadata/_custom_type_script = "uid://byeuv1i152oey"
+
+[node name="PlayerMovement" type="Node" parent="."]
+script = ExtResource("1_g2els")
+metadata/_custom_type_script = "uid://wy7vtpkatgjx"
+
+[node name="PickMoveHandler" type="Node" parent="." node_paths=PackedStringArray("impulse_timer", "cooldown_timer")]
+script = ExtResource("4_dqkch")
+impulse_timer = NodePath("ImpulseTimer")
+cooldown_timer = NodePath("CooldownTimer")
+
+[node name="ImpulseTimer" type="Timer" parent="PickMoveHandler"]
+
+[node name="CooldownTimer" type="Timer" parent="PickMoveHandler"]
+
+[connection signal="timeout" from="PickMoveHandler/ImpulseTimer" to="PickMoveHandler" method="_on_impulse_timer_timeout"]
+[connection signal="timeout" from="PickMoveHandler/CooldownTimer" to="PickMoveHandler" method="_on_cooldown_timer_timeout"]

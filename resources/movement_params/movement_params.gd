@@ -12,9 +12,24 @@ class_name movement_params extends Resource
 @export var jump_force: float
 @export var fast_gravity: float #applied if the jump button is let go of before upward movement has stupped.
 @export var terminal_velocity: float #limit of how fast it can fall
+@export var impulse_velocity: float
+@export var impulse_time: float
 
 #the above are all for horizontal movement only
-func _init(p_max_horizontal_speed = 0.0, p_ground_accel = 0.0, p_air_accel = 0.0, p_ground_drag = 0.0, p_air_drag = 0.0, p_ground_break_accel = 0.0, p_gravity = 0.0, p_jump_force = 0.0, p_fast_gravity = 0.0, p_terminal_velocity = 0.0):
+func _init(
+	p_max_horizontal_speed = 0.0, 
+	p_ground_accel = 0.0, 
+	p_air_accel = 0.0, 
+	p_ground_drag = 0.0, 
+	p_air_drag = 0.0, 
+	p_ground_break_accel = 0.0, 
+	p_gravity = 0.0, 
+	p_jump_force = 0.0, 
+	p_fast_gravity = 0.0, 
+	p_terminal_velocity = 0.0,
+	p_impulse_velocity = 0.0,
+	p_impulse_time = 0.0
+):
 	max_horizontal_speed = p_max_horizontal_speed
 	ground_accel = p_ground_accel
 	air_accel = p_air_accel
@@ -25,3 +40,5 @@ func _init(p_max_horizontal_speed = 0.0, p_ground_accel = 0.0, p_air_accel = 0.0
 	jump_force = p_jump_force
 	fast_gravity = p_fast_gravity
 	terminal_velocity = p_terminal_velocity
+	impulse_velocity = p_impulse_velocity
+	impulse_time = p_impulse_time

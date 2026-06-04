@@ -1,6 +1,13 @@
-class_name PlayerMovement extends PlayerInputProcessor
+class_name PlayerMovement extends Node
 
-@export var default_params: Resource
+##the below given by player node
+var body: CharacterBody2D
+var input_handler: PlayerInputProcessor
+var default_params: Resource:
+	set(value):
+		default_params = value
+		set_default_params()
+
 @export var flippable: Node2D #the node to flip, so it's not just the sprite
 #but also every node that is asymmetrical to the sprite
 @export var jump_buffer_frames: int #how many physics process a mid-air jump input should be remembered to trigger an immediate jump when ground is reached
@@ -12,37 +19,38 @@ var fast_falling: bool #whether the current jump has already began fast fall
 #fast fall is when the player's upwards acceleration quickly decays as a result of releasing the jump button
 var jump_buffer: int #how many frames left of holding a jump input in memory
 var just_stomped: bool
+var disabled: bool
 
 func _ready() -> void:
 	set_default_params()
+	disabled = false
 
 func set_default_params(): #quick function to reset the movement params back to the default
 	current_active_params = default_params
 
-func _physics_process(delta: float) -> void:
-	super(delta) ## this updates the horizontal_input and jump variables
-	
-	velocity.x = calculate_horizontal_velocity(horizontal_input) #self explanatory
-	velocity.y = calculate_vertical_velocity(jump_input)
+func _physics_process(_delta: float) -> void:
+	if disabled: return
+	body.velocity.x = calculate_horizontal_velocity(input_handler.horizontal_input) #self explanatory
+	body.velocity.y = calculate_vertical_velocity(input_handler.jump_input)
 	update_jump_buffer() #updates the jump_buffer if need be
-	move_and_slide()
+	body.move_and_slide()
 	
 
 	## flip the sprite according to face direction
 	if flippable != null:
-		if horizontal_input > 0:
+		if input_handler.horizontal_input > 0:
 			flippable.scale.x = 1
-		elif horizontal_input < 0:
+		elif input_handler.horizontal_input < 0:
 			flippable.scale.x = -1
 		
-	current_horizontal_speed = velocity.x ##update these values so they can be used in the next calculation
-	current_vertical_speed = velocity.y
+	current_horizontal_speed = body.velocity.x ##update these values so they can be used in the next calculation
+	current_vertical_speed = body.velocity.y
 	#print(velocity.y)
 
 func update_jump_buffer():
-	if is_on_floor():
+	if body.is_on_floor():
 		jump_buffer = 0
-	elif jump_input == Enums.Button_State.PRESSED:
+	elif input_handler.jump_input == Enums.Button_State.PRESSED:
 		jump_buffer = jump_buffer_frames
 	elif jump_buffer > 0:
 		jump_buffer -= 1
@@ -57,7 +65,7 @@ func calculate_horizontal_velocity(input_num: float) -> float:
 	return move_toward(current_horizontal_speed, target_speed, accel)
 
 func get_horizontal_accel(input_num: float) -> float: ##will need to be modified to use the air versions of all these parameters
-	if is_on_floor():
+	if body.is_on_floor():
 		if input_num == 0: ## if no movement is being held we use ground drag.
 			return current_active_params.ground_drag
 		elif signf(input_num) != signf(current_horizontal_speed): ##if the player is pushing the stick against current inertia
@@ -72,9 +80,9 @@ func get_horizontal_accel(input_num: float) -> float: ##will need to be modified
 		# no break accel since air movility needs to be lower than ground
 
 func calculate_vertical_velocity(jump_state : Enums.Button_State) -> float:
-	if is_on_floor():
-		if down_input == Enums.Button_State.PRESSED:
-			position.y += 1
+	if body.is_on_floor():
+		if input_handler.down_input == Enums.Button_State.PRESSED:
+			body.position.y += 1
 		if (jump_state != Enums.Button_State.PRESSED) && (jump_buffer == 0): ##if on the floor, the only input that matters is that a jump BEGAN
 			fast_falling = false #reset this bool so the jump uses normal deceleration until told otherwise
 			return 0.0
@@ -101,4 +109,4 @@ func get_vertical_accel(jump_state: Enums.Button_State) -> float:
 func kill_momentum(): #if for any reason it becomes necessary to do this
 	current_horizontal_speed = 0
 	current_vertical_speed = 0
-	velocity = Vector2.ZERO
+	body.velocity = Vector2.ZERO

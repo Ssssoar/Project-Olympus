@@ -14,4 +14,6 @@ gravity = 45.0
 jump_force = 1500.0
 fast_gravity = 150.0
 terminal_velocity = 50000.0
+impulse_velocity = 800.0
+impulse_time = 0.3
 metadata/_custom_type_script = "uid://dls0m205nrnpc"
