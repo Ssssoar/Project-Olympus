@@ -21,12 +21,11 @@ height = 20
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qlg0r"]
 size = Vector2(4, 26)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("input_handler", "movement_handler", "pick_handler", "movement_state_machine")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("input_handler", "movement_handler", "pick_handler")]
 script = ExtResource("1_qhqgy")
 input_handler = NodePath("PlayerInputProcessor")
 movement_handler = NodePath("PlayerMovementStateMachine/WalkMovement")
 pick_handler = NodePath("PlayerMovementStateMachine/DashMovement")
-movement_state_machine = NodePath("PlayerMovementStateMachine")
 default_params = ExtResource("2_qhqgy")
 
 [node name="PlayerShape" type="CollisionShape2D" parent="."]
@@ -78,6 +77,5 @@ player_state = 1
 [connection signal="body_entered" from="PickAreaL" to="PickReactionHandler" method="_on_pick_area_l_body_entered"]
 [connection signal="body_entered" from="PickAreaR" to="PickReactionHandler" method="_on_pick_area_r_body_entered"]
 [connection signal="player_movement_state_changed" from="PlayerMovementStateMachine" to="PlayerMovementStateMachine/WalkMovement" method="_on_player_movement_state_machine_player_movement_state_changed"]
-[connection signal="player_movement_state_changed" from="PlayerMovementStateMachine" to="PlayerMovementStateMachine/DashMovement" method="_on_player_movement_state_machine_player_movement_state_changed"]
 [connection signal="timeout" from="PlayerMovementStateMachine/WalkMovement/DashCooldownTimer" to="PlayerMovementStateMachine/WalkMovement" method="_on_dash_cooldown_timer_timeout"]
 [connection signal="timeout" from="PlayerMovementStateMachine/DashMovement/ImpulseTimer" to="PlayerMovementStateMachine/DashMovement" method="_on_impulse_timer_timeout"]

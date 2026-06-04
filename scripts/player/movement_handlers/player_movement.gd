@@ -1,4 +1,4 @@
-class_name PlayerMovement extends Node
+class_name WalkMovement extends MovementHandler
 
 ##the below given by player node
 var body: CharacterBody2D
@@ -8,9 +8,15 @@ var default_params: Resource:
 		default_params = value
 		set_default_params()
 
+######cooldown_timer.start(current_params.impulse_time * 1.3) ##magic number :C
+
 @export var flippable: Node2D #the node to flip, so it's not just the sprite
+@export var impulse_cooldown_timer: Timer
 #but also every node that is asymmetrical to the sprite
 @export var jump_buffer_frames: int #how many physics process a mid-air jump input should be remembered to trigger an immediate jump when ground is reached
+@export var dash_cooldown_time: float
+
+var movement_state_machine: PlayerMovementStateMachine
 
 var current_active_params: Resource #the currently active list of numbers that will be used for physics and movement
 var current_horizontal_speed: float #direction and magnitude of the current horizontal movement
@@ -19,7 +25,7 @@ var fast_falling: bool #whether the current jump has already began fast fall
 #fast fall is when the player's upwards acceleration quickly decays as a result of releasing the jump button
 var jump_buffer: int #how many frames left of holding a jump input in memory
 var just_stomped: bool
-var disabled: bool
+var on_dash_cooldown: bool
 
 func _ready() -> void:
 	set_default_params()
@@ -29,7 +35,9 @@ func set_default_params(): #quick function to reset the movement params back to 
 	current_active_params = default_params
 
 func _physics_process(_delta: float) -> void:
-	if disabled: return
+	if disabled:
+		return
+	try_start_impulse()
 	body.velocity.x = calculate_horizontal_velocity(input_handler.horizontal_input) #self explanatory
 	body.velocity.y = calculate_vertical_velocity(input_handler.jump_input)
 	update_jump_buffer() #updates the jump_buffer if need be
@@ -110,3 +118,26 @@ func kill_momentum(): #if for any reason it becomes necessary to do this
 	current_horizontal_speed = 0
 	current_vertical_speed = 0
 	body.velocity = Vector2.ZERO
+
+func try_start_impulse() -> bool:
+	if (
+		(
+			input_handler.pickl_input == Enums.Button_State.PRESSED ||
+			input_handler.pickr_input == Enums.Button_State.PRESSED
+		)
+		&& !on_dash_cooldown
+	):
+		movement_state_machine.try_change_player_movement_state(Enums.Player_Movement_State.DASHING)
+		return true
+	else:
+		return false
+
+
+func _on_player_movement_state_machine_player_movement_state_changed(state_changed_to: int, state_changed_from: int) -> void:
+	super(state_changed_to, state_changed_from)
+	if state_changed_to == Enums.Player_Movement_State.DASHING:
+		on_dash_cooldown = true
+		impulse_cooldown_timer.start(dash_cooldown_time)
+
+func _on_dash_cooldown_timer_timeout() -> void:
+	on_dash_cooldown = false
