@@ -3,7 +3,8 @@ class_name WalkMovement extends MovementHandler
 ##the below given by player node
 var body: CharacterBody2D
 var input_handler: PlayerInputProcessor
-var default_params: Resource:
+var movement_state_machine: PlayerMovementStateMachine
+var default_params: MovementParams:
 	set(value):
 		default_params = value
 		set_default_params()
@@ -16,9 +17,7 @@ var default_params: Resource:
 @export var jump_buffer_frames: int #how many physics process a mid-air jump input should be remembered to trigger an immediate jump when ground is reached
 @export var dash_cooldown_time: float
 
-var movement_state_machine: PlayerMovementStateMachine
-
-var current_active_params: Resource #the currently active list of numbers that will be used for physics and movement
+var current_active_params: MovementParams #the currently active list of numbers that will be used for physics and movement
 var current_horizontal_speed: float #direction and magnitude of the current horizontal movement
 var current_vertical_speed: float #same as above
 var fast_falling: bool #whether the current jump has already began fast fall
@@ -26,6 +25,7 @@ var fast_falling: bool #whether the current jump has already began fast fall
 var jump_buffer: int #how many frames left of holding a jump input in memory
 var just_stomped: bool
 var on_dash_cooldown: bool
+var fast_fall_disabled: bool
 
 func _ready() -> void:
 	set_default_params()
@@ -89,6 +89,7 @@ func get_horizontal_accel(input_num: float) -> float: ##will need to be modified
 
 func calculate_vertical_velocity(jump_state : Enums.Button_State) -> float:
 	if body.is_on_floor():
+		fast_fall_disabled = false
 		if input_handler.down_input == Enums.Button_State.PRESSED:
 			body.position.y += 1
 		if (jump_state != Enums.Button_State.PRESSED) && (jump_buffer == 0): ##if on the floor, the only input that matters is that a jump BEGAN
@@ -103,6 +104,8 @@ func calculate_vertical_velocity(jump_state : Enums.Button_State) -> float:
 		return move_toward(current_vertical_speed, current_active_params.terminal_velocity, accel)
 
 func get_vertical_accel(jump_state: Enums.Button_State) -> float:
+	if fast_fall_disabled:
+		return current_active_params.gravity
 	##uncomment these two lines if you want fast falling to only be applied on upwards velocity
 	##if current_vertical_speed >= 0.0:
 	##	return current_active_params.gravity
@@ -135,6 +138,31 @@ func _on_player_movement_state_machine_player_movement_state_changed(state_chang
 	if state_changed_to == Enums.Player_Movement_State.DASHING:
 		on_dash_cooldown = true
 		impulse_cooldown_timer.start(dash_cooldown_time)
+	if state_changed_to == Enums.Player_Movement_State.NORMAL:
+		kill_momentum()
+		fast_fall_disabled = true
+		print("should be first")
 
 func _on_dash_cooldown_timer_timeout() -> void:
 	on_dash_cooldown = false
+
+func _on_pick_reaction_handler_bounced(direction: Enums.Facing) -> void:
+	kill_momentum()
+	body.velocity.x = current_active_params.bounce_force
+	if direction == Enums.Facing.LEFT:
+		body.velocity.x *= -1
+	current_horizontal_speed = body.velocity.x
+	body.velocity.y = current_active_params.bounce_elevation
+	current_vertical_speed = -body.velocity.y
+	fast_fall_disabled = true
+
+func _on_cling_movement_jumped() -> void:
+	print("should be second")
+	body.velocity.y = -current_active_params.jump_force
+	current_vertical_speed = -current_active_params.jump_force
+	fast_fall_disabled = false
+	fast_falling = false
+
+func _on_cling_movement_dropped() -> void:
+	fast_fall_disabled = true #feels redundant but I gotta be sure
+	fast_falling = false

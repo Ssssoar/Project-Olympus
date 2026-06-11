@@ -1,4 +1,4 @@
-class_name movement_params extends Resource
+class_name MovementParams extends Resource
 ##the idea of making this a resource is to allow for easy hotswapping during gameplay
 ##say, for example, if we want the player to become heavier as a result of some mechanic
 

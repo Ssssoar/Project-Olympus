@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bqrekrucoblsp"]
+[gd_scene load_steps=13 format=3 uid="uid://bqrekrucoblsp"]
 
 [ext_resource type="Script" uid="uid://wy7vtpkatgjx" path="res://scripts/player/movement_handlers/player_movement.gd" id="1_g2els"]
 [ext_resource type="Script" uid="uid://cbsdup0jpvjk7" path="res://scripts/player/player.gd" id="1_qhqgy"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bbj3ctwmn2kbm" path="res://scripts/player/movement_handlers/pick_move.gd" id="4_dqkch"]
 [ext_resource type="Script" uid="uid://dn8383bawnrav" path="res://scripts/player/player_movement_state_machine.gd" id="5_fjrip"]
 [ext_resource type="Script" uid="uid://cuecb78rx87k5" path="res://scripts/player/pick_reaction.gd" id="6_tuyoq"]
+[ext_resource type="Script" uid="uid://cvtrxrc6vl5bt" path="res://scripts/player/movement_handlers/cling_movement.gd" id="8_smehm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h3xc6"]
 
@@ -21,12 +22,14 @@ height = 20
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qlg0r"]
 size = Vector2(4, 26)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("input_handler", "movement_handler", "pick_handler", "movement_state_machine")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("input_handler", "movement_handler", "pick_handler", "movement_state_machine", "pick_reaction_handler", "cling_handler")]
 script = ExtResource("1_qhqgy")
 input_handler = NodePath("PlayerInputProcessor")
 movement_handler = NodePath("PlayerMovementStateMachine/WalkMovement")
 pick_handler = NodePath("PlayerMovementStateMachine/DashMovement")
 movement_state_machine = NodePath("PlayerMovementStateMachine")
+pick_reaction_handler = NodePath("PickReactionHandler")
+cling_handler = NodePath("PlayerMovementStateMachine/ClingMovement")
 default_params = ExtResource("2_qhqgy")
 
 [node name="PlayerShape" type="CollisionShape2D" parent="."]
@@ -43,19 +46,22 @@ metadata/_custom_type_script = "uid://byeuv1i152oey"
 script = ExtResource("6_tuyoq")
 
 [node name="PickAreaL" type="Area2D" parent="."]
+monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PickAreaL"]
+[node name="Shape" type="CollisionShape2D" parent="PickAreaL"]
 position = Vector2(-12, 0)
 shape = SubResource("RectangleShape2D_qlg0r")
 
 [node name="PickAreaR" type="Area2D" parent="."]
+monitoring = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PickAreaR"]
+[node name="Shape" type="CollisionShape2D" parent="PickAreaR"]
 position = Vector2(12, 0)
 shape = SubResource("RectangleShape2D_qlg0r")
 
 [node name="PlayerMovementStateMachine" type="Node" parent="."]
 script = ExtResource("5_fjrip")
+chatty = true
 metadata/_custom_type_script = "uid://dn8383bawnrav"
 
 [node name="WalkMovement" type="Node" parent="PlayerMovementStateMachine" node_paths=PackedStringArray("impulse_cooldown_timer")]
@@ -77,9 +83,17 @@ player_state = 1
 [node name="ImpulseTimer" type="Timer" parent="PlayerMovementStateMachine/DashMovement"]
 one_shot = true
 
+[node name="ClingMovement" type="Node" parent="PlayerMovementStateMachine"]
+script = ExtResource("8_smehm")
+player_state = 2
+
+[connection signal="bounced" from="PickReactionHandler" to="PlayerMovementStateMachine/WalkMovement" method="_on_pick_reaction_handler_bounced"]
 [connection signal="body_entered" from="PickAreaL" to="PickReactionHandler" method="_on_pick_area_l_body_entered"]
 [connection signal="body_entered" from="PickAreaR" to="PickReactionHandler" method="_on_pick_area_r_body_entered"]
 [connection signal="player_movement_state_changed" from="PlayerMovementStateMachine" to="PlayerMovementStateMachine/WalkMovement" method="_on_player_movement_state_machine_player_movement_state_changed"]
 [connection signal="player_movement_state_changed" from="PlayerMovementStateMachine" to="PlayerMovementStateMachine/DashMovement" method="_on_player_movement_state_machine_player_movement_state_changed"]
+[connection signal="player_movement_state_changed" from="PlayerMovementStateMachine" to="PlayerMovementStateMachine/ClingMovement" method="_on_player_movement_state_machine_player_movement_state_changed"]
 [connection signal="timeout" from="PlayerMovementStateMachine/WalkMovement/DashCooldownTimer" to="PlayerMovementStateMachine/WalkMovement" method="_on_dash_cooldown_timer_timeout"]
 [connection signal="timeout" from="PlayerMovementStateMachine/DashMovement/ImpulseTimer" to="PlayerMovementStateMachine/DashMovement" method="_on_impulse_timer_timeout"]
+[connection signal="dropped" from="PlayerMovementStateMachine/ClingMovement" to="PlayerMovementStateMachine/WalkMovement" method="_on_cling_movement_dropped"]
+[connection signal="jumped" from="PlayerMovementStateMachine/ClingMovement" to="PlayerMovementStateMachine/WalkMovement" method="_on_cling_movement_jumped"]

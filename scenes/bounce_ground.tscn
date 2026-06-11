@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://civ8lbqtyfv5j"]
+
+[ext_resource type="Script" uid="uid://bj0uw00wspinf" path="res://scripts/ground/ground.gd" id="1_fhxv5"]
+
+[sub_resource type="Gradient" id="Gradient_7ylpw"]
+colors = PackedColorArray(0.19676903, 0.40404713, 0.62090945, 1, 0.19607843, 0.40392157, 0.61960787, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pybca"]
+gradient = SubResource("Gradient_7ylpw")
+width = 20
+height = 20
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mi8v4"]
+
+[node name="BounceGround" type="StaticBody2D"]
+script = ExtResource("1_fhxv5")
+type = 2
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_pybca")
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mi8v4")

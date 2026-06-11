@@ -1,12 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://civ8lbqtyfv5j"]
+[gd_scene load_steps=5 format=3 uid="uid://c0quxs2hblhaa"]
 
 [ext_resource type="Script" uid="uid://bj0uw00wspinf" path="res://scripts/ground/ground.gd" id="1_fhxv5"]
 
-[sub_resource type="Gradient" id="Gradient_7ylpw"]
-colors = PackedColorArray(0.5764706, 0.31764707, 0.11764706, 1, 0.5764706, 0.31764707, 0.11764706, 1)
+[sub_resource type="Gradient" id="Gradient_fhxv5"]
+colors = PackedColorArray(0.56078434, 0.23137255, 0, 1, 0.56078434, 0.23137255, 0, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_pybca"]
-gradient = SubResource("Gradient_7ylpw")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2q12f"]
+gradient = SubResource("Gradient_fhxv5")
 width = 20
 height = 20
 
@@ -16,7 +16,7 @@ height = 20
 script = ExtResource("1_fhxv5")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = SubResource("GradientTexture2D_pybca")
+texture = SubResource("GradientTexture2D_2q12f")
 
 [node name="Shape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_mi8v4")

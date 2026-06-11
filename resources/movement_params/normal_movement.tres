@@ -16,4 +16,6 @@ fast_gravity = 150.0
 terminal_velocity = 50000.0
 impulse_velocity = 1300.0
 impulse_time = 0.1
+bounce_force = 600.0
+bounce_elevation = 950.0
 metadata/_custom_type_script = "uid://dls0m205nrnpc"

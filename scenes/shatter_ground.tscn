@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://c1jqshqrv3248"]
+
+[ext_resource type="Script" uid="uid://bj0uw00wspinf" path="res://scripts/ground/ground.gd" id="1_w4tpd"]
+[ext_resource type="Script" uid="uid://b0cj8ew3eojji" path="res://scripts/ground/break_effect.gd" id="2_wfv37"]
+
+[sub_resource type="Gradient" id="Gradient_wfv37"]
+colors = PackedColorArray(0.7372549, 0.64705884, 0.27058825, 1, 0.7372549, 0.64705884, 0.27058825, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_m3o5t"]
+gradient = SubResource("Gradient_wfv37")
+width = 20
+height = 20
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mi8v4"]
+
+[node name="ShatterGround" type="StaticBody2D"]
+script = ExtResource("1_w4tpd")
+type = 1
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_m3o5t")
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mi8v4")
+
+[node name="BreakEffect" type="Node" parent="." node_paths=PackedStringArray("base_node")]
+script = ExtResource("2_wfv37")
+base_node = NodePath("..")
+
+[connection signal="struck" from="." to="BreakEffect" method="_on_bounce_ground_struck"]
