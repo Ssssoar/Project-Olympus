@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bqrekrucoblsp"]
+[gd_scene load_steps=15 format=3 uid="uid://bqrekrucoblsp"]
 
 [ext_resource type="Script" uid="uid://wy7vtpkatgjx" path="res://scripts/player/movement_handlers/player_movement.gd" id="1_g2els"]
 [ext_resource type="Script" uid="uid://cbsdup0jpvjk7" path="res://scripts/player/player.gd" id="1_qhqgy"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://dn8383bawnrav" path="res://scripts/player/player_movement_state_machine.gd" id="5_fjrip"]
 [ext_resource type="Script" uid="uid://cuecb78rx87k5" path="res://scripts/player/pick_reaction.gd" id="6_tuyoq"]
 [ext_resource type="Script" uid="uid://cvtrxrc6vl5bt" path="res://scripts/player/movement_handlers/cling_movement.gd" id="8_smehm"]
+[ext_resource type="Script" uid="uid://b5ko5xxeo3gti" path="res://scripts/player/game_over_handler.gd" id="9_ur7pv"]
+[ext_resource type="PackedScene" uid="uid://yurp3r6v306k" path="res://scenes/particles/death_particle.tscn" id="10_y4r1p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h3xc6"]
 
@@ -86,6 +88,10 @@ one_shot = true
 [node name="ClingMovement" type="Node" parent="PlayerMovementStateMachine"]
 script = ExtResource("8_smehm")
 player_state = 2
+
+[node name="GameOverHandler" type="Node" parent="."]
+script = ExtResource("9_ur7pv")
+particle = ExtResource("10_y4r1p")
 
 [connection signal="bounced" from="PickReactionHandler" to="PlayerMovementStateMachine/WalkMovement" method="_on_pick_reaction_handler_bounced"]
 [connection signal="body_entered" from="PickAreaL" to="PickReactionHandler" method="_on_pick_area_l_body_entered"]

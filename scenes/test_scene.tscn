@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dajn15ecvmknd"]
+[gd_scene load_steps=9 format=3 uid="uid://dajn15ecvmknd"]
 
 [ext_resource type="PackedScene" uid="uid://bqrekrucoblsp" path="res://scenes/player.tscn" id="1_g7g4h"]
 [ext_resource type="PackedScene" uid="uid://civ8lbqtyfv5j" path="res://scenes/bounce_ground.tscn" id="2_j8ivh"]
 [ext_resource type="PackedScene" uid="uid://c1jqshqrv3248" path="res://scenes/shatter_ground.tscn" id="3_nd71p"]
 [ext_resource type="PackedScene" uid="uid://c0quxs2hblhaa" path="res://scenes/cling_ground.tscn" id="4_7ddre"]
+[ext_resource type="PackedScene" uid="uid://yurp3r6v306k" path="res://scenes/particles/death_particle.tscn" id="5_qjeyg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3qnke"]
 size = Vector2(64, 64)
@@ -34,9 +35,12 @@ position = Vector2(726, 391.00003)
 scale = Vector2(-5.0138507, 18.494284)
 
 [node name="ShatterGround" parent="." instance=ExtResource("3_nd71p")]
-position = Vector2(118, 388)
+position = Vector2(1060, 356.00003)
 scale = Vector2(1, 7.5599995)
 
 [node name="ClingGround" parent="." instance=ExtResource("4_7ddre")]
-position = Vector2(479, 409)
+position = Vector2(924, 405.00003)
 scale = Vector2(8.159999, 16.92)
+
+[node name="DeathParticle" parent="." instance=ExtResource("5_qjeyg")]
+position = Vector2(326, 318)
