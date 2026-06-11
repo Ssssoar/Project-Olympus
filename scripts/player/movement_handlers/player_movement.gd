@@ -121,10 +121,7 @@ func kill_momentum(): #if for any reason it becomes necessary to do this
 
 func try_start_impulse() -> bool:
 	if (
-		(
-			input_handler.pickl_input == Enums.Button_State.PRESSED ||
-			input_handler.pickr_input == Enums.Button_State.PRESSED
-		)
+		(input_handler.pickl_input == Enums.Button_State.PRESSED || input_handler.pickr_input == Enums.Button_State.PRESSED)
 		&& !on_dash_cooldown
 	):
 		movement_state_machine.try_change_player_movement_state(Enums.Player_Movement_State.DASHING)

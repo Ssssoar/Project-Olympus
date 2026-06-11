@@ -65,6 +65,7 @@ dash_cooldown_time = 0.5
 metadata/_custom_type_script = "uid://wy7vtpkatgjx"
 
 [node name="DashCooldownTimer" type="Timer" parent="PlayerMovementStateMachine/WalkMovement"]
+one_shot = true
 
 [node name="DashMovement" type="Node" parent="PlayerMovementStateMachine" node_paths=PackedStringArray("impulse_timer", "pick_area_l", "pick_area_r")]
 script = ExtResource("4_dqkch")
@@ -74,6 +75,7 @@ pick_area_r = NodePath("../../PickAreaR")
 player_state = 1
 
 [node name="ImpulseTimer" type="Timer" parent="PlayerMovementStateMachine/DashMovement"]
+one_shot = true
 
 [connection signal="body_entered" from="PickAreaL" to="PickReactionHandler" method="_on_pick_area_l_body_entered"]
 [connection signal="body_entered" from="PickAreaR" to="PickReactionHandler" method="_on_pick_area_r_body_entered"]

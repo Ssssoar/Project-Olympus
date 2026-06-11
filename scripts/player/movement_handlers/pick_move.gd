@@ -40,7 +40,6 @@ func get_current_impulse_input() -> Enums.Facing:
 
 func begin_impulse(direction: Enums.Facing):
 	movement_handler.kill_momentum()
-	movement_handler.disabled = true
 	on_cooldown = true
 	current_params = movement_handler.current_active_params
 	current_direction = direction
@@ -78,4 +77,5 @@ func _on_impulse_timer_timeout() -> void:
 	current_params = null
 	disable_areas()
 	movement_state_machine.try_change_player_movement_state(Enums.Player_Movement_State.NORMAL)
+	print("hapepnr")
 	locked = false

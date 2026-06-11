@@ -3,8 +3,14 @@ class_name PlayerMovementStateMachine extends StateMachine
 var current_movement_state: Enums.Player_Movement_State:
 	get:
 		return current_state as Enums.Player_Movement_State
+	set(value):
+		current_state = value as int
 
 signal player_movement_state_changed(state_changed_to: Enums.Player_Movement_State, state_changed_from: Enums.Player_Movement_State)
+
+func _process(_delta: float):
+	super(_delta)
+	pass
 
 func initialize_transisitions_array():
 	states = Enums.Player_Movement_State.values()
@@ -24,10 +30,10 @@ func try_change_player_movement_state(target_state: Enums.Player_Movement_State)
 
 func state_to_name(state: Enums.Player_Movement_State) -> String:
 	match state:
-		Enums.Hand_State.NORMAL:
+		Enums.Player_Movement_State.NORMAL:
 			return "NORMAL"
-		Enums.Hand_State.CLINGING:
+		Enums.Player_Movement_State.CLINGING:
 			return "CLINGING"
-		Enums.Hand_State.DASHING:
+		Enums.Player_Movement_State.DASHING:
 			return "DASHING"
-	return "NO STATE" ##which SHOULDNT HAPPEN
+	return "NO STATE" ##which SHOULDNT HAPPENda
