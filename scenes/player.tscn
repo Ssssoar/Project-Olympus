@@ -63,7 +63,6 @@ shape = SubResource("RectangleShape2D_qlg0r")
 
 [node name="PlayerMovementStateMachine" type="Node" parent="."]
 script = ExtResource("5_fjrip")
-chatty = true
 metadata/_custom_type_script = "uid://dn8383bawnrav"
 
 [node name="WalkMovement" type="Node" parent="PlayerMovementStateMachine" node_paths=PackedStringArray("impulse_cooldown_timer")]
