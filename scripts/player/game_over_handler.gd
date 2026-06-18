@@ -12,7 +12,7 @@ func trigger_game_over():
 	var instantiated = particle.instantiate() as Node2D
 	player.get_parent().add_child(instantiated)
 	instantiated.position = player.position
-	(instantiated as GPUParticles2D). emitting = true
+	(instantiated as GPUParticles2D).emitting = true
 	player.hide()
 	timer.start()
 

@@ -1,0 +1,38 @@
+F4:
+F5: ||||
+F6: |
+F7:
+
+1: |
+2: ||
+3:
+4:|
+5: |
+6:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mati
+ideas: muros que requieren multiples dash, mas JUGO, trampas y cuerdas y cosas similares, gemas o cosas dentro de los muros que permitan ir mas rápido o anda a saber tú.
+en ningún momento intento usar el movimiento del drop, no se le ocurrió. el salto con el muro pareció ser la parte mas satisfactoria. No le gustó perder control aéreo después del dash. Siempre prefirió mayor control aéreo.
+
+crasheos a veces al colisionar con muro.
