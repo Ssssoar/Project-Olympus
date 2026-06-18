@@ -46,5 +46,5 @@ position = Vector2(924, 405.00003)
 scale = Vector2(8.159999, 16.92)
 
 [node name="Hazard" parent="." instance=ExtResource("6_3qnke")]
-position = Vector2(490, 552)
+position = Vector2(490, 81)
 scale = Vector2(15.789524, 2.5579917)

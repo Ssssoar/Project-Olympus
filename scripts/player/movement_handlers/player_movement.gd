@@ -34,6 +34,9 @@ func _ready() -> void:
 func set_default_params(): #quick function to reset the movement params back to the default
 	current_active_params = default_params
 
+func set_params(params: MovementParams):
+	current_active_params = params
+
 func _physics_process(_delta: float) -> void:
 	if disabled:
 		return
