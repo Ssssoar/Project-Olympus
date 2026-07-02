@@ -15,6 +15,7 @@ var current_direction: Enums.Facing
 var locked: bool
 
 func _ready() -> void:
+	super()
 	current_direction = Enums.Facing.NONE
 
 func _physics_process(_delta: float) -> void:

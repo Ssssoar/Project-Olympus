@@ -125,7 +125,8 @@ func kill_momentum(): #if for any reason it becomes necessary to do this
 func try_start_impulse() -> bool:
 	if (
 		(input_handler.pickl_input == Enums.Button_State.PRESSED || input_handler.pickr_input == Enums.Button_State.PRESSED)
-		&& !on_dash_cooldown
+		&& (!on_dash_cooldown)
+		&& ((body as Player).can_dash)
 	):
 		movement_state_machine.try_change_player_movement_state(Enums.Player_Movement_State.DASHING)
 		return true
@@ -141,7 +142,6 @@ func _on_player_movement_state_machine_player_movement_state_changed(state_chang
 	if state_changed_to == Enums.Player_Movement_State.NORMAL:
 		kill_momentum()
 		fast_fall_disabled = true
-		print("should be first")
 
 func _on_dash_cooldown_timer_timeout() -> void:
 	on_dash_cooldown = false
@@ -157,7 +157,6 @@ func _on_pick_reaction_handler_bounced(direction: Enums.Facing) -> void:
 	fast_fall_disabled = true
 
 func _on_cling_movement_jumped() -> void:
-	print("should be second")
 	body.velocity.y = -current_active_params.jump_force
 	current_vertical_speed = -current_active_params.jump_force
 	fast_fall_disabled = false

@@ -1,0 +1,518 @@
+[gd_scene load_steps=9 format=3 uid="uid://b8barpl7qbois"]
+
+[ext_resource type="Script" uid="uid://dpoh0jqgiqnl6" path="res://scripts/levels/level.gd" id="1_qgxqk"]
+[ext_resource type="PackedScene" uid="uid://bqrekrucoblsp" path="res://scenes/player.tscn" id="2_t0ybu"]
+[ext_resource type="PackedScene" uid="uid://b7w0jb6c8i763" path="res://scenes/terrain/normal_ground.tscn" id="3_mofoo"]
+[ext_resource type="PackedScene" uid="uid://c1jqshqrv3248" path="res://scenes/terrain/shatter_ground.tscn" id="4_llcge"]
+[ext_resource type="PackedScene" uid="uid://c0quxs2hblhaa" path="res://scenes/terrain/cling_ground.tscn" id="5_lwi15"]
+
+[sub_resource type="Gradient" id="Gradient_nr3cb"]
+colors = PackedColorArray(0.62272704, 0.00030649663, 0.62843096, 1, 0.62352943, 0, 0.627451, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j60wy"]
+gradient = SubResource("Gradient_nr3cb")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nr3cb"]
+size = Vector2(310.5, 259)
+
+[node name="level_01" type="Node2D"]
+script = ExtResource("1_qgxqk")
+level_name = "test"
+
+[node name="Player" parent="." instance=ExtResource("2_t0ybu")]
+position = Vector2(529, 355)
+
+[node name="Goal" type="Sprite2D" parent="."]
+position = Vector2(7955, -3015)
+texture = SubResource("GradientTexture2D_j60wy")
+
+[node name="Terrain" type="Node" parent="."]
+
+[node name="Staircase" type="Node" parent="Terrain"]
+
+[node name="NormalGround" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(627, 621)
+scale = Vector2(19.880001, 1)
+
+[node name="NormalGround2" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(1556, 599.99994)
+scale = Vector2(9.24, 1.6799986)
+
+[node name="NormalGround3" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(1556, 599.99994)
+scale = Vector2(9.24, 1.6799986)
+
+[node name="NormalGround4" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(1995, 579.00006)
+scale = Vector2(4.600004, 2.3599987)
+
+[node name="NormalGround5" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(1992.9999, 534.00006)
+scale = Vector2(2.999999, 2.3599987)
+
+[node name="NormalGround6" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(2034.0002, 488.00003)
+scale = Vector2(2.7199988, 2.3599987)
+
+[node name="NormalGround7" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(2116, 441.00003)
+scale = Vector2(3.9792793, 2.3599987)
+
+[node name="NormalGround8" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(2121, 398.00003)
+scale = Vector2(2.8399987, 2.3599987)
+
+[node name="NormalGround9" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(2235, 445.00003)
+scale = Vector2(4.6684494, 3.8241267)
+
+[node name="NormalGround10" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(2514, 397.00006)
+scale = Vector2(4.600004, 2.3599987)
+
+[node name="NormalGround11" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(2512, 352.00003)
+scale = Vector2(2.999999, 2.3599987)
+
+[node name="NormalGround12" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(2553.0002, 306)
+scale = Vector2(2.7199988, 2.3599987)
+
+[node name="NormalGround13" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(2635, 259)
+scale = Vector2(3.9792793, 2.3599987)
+
+[node name="NormalGround14" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(2640, 216.00002)
+scale = Vector2(2.8399987, 2.3599987)
+
+[node name="NormalGround15" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(2754, 263)
+scale = Vector2(4.6684494, 3.8241267)
+
+[node name="NormalGround16" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(3048, 215.00006)
+scale = Vector2(4.600004, 2.3599987)
+
+[node name="NormalGround17" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(3046, 170.00003)
+scale = Vector2(2.999999, 2.3599987)
+
+[node name="NormalGround18" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(3087.0002, 124.00003)
+scale = Vector2(2.7199988, 2.3599987)
+
+[node name="NormalGround19" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(3169, 77.00003)
+scale = Vector2(3.9792793, 2.3599987)
+
+[node name="NormalGround20" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(3174, 34.00003)
+scale = Vector2(2.8399987, 2.3599987)
+
+[node name="NormalGround21" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(3239, 284)
+rotation = -3.1415927
+scale = Vector2(2.0235333, -10.169665)
+
+[node name="NormalGround22" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(3534.9998, 28.000092)
+scale = Vector2(4.600004, 2.3599987)
+
+[node name="NormalGround23" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(3533, -16.99997)
+scale = Vector2(2.999999, 2.3599987)
+
+[node name="NormalGround24" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(3574, -62.99994)
+scale = Vector2(2.7199988, 2.3599987)
+
+[node name="NormalGround25" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(3655.9998, -109.99994)
+scale = Vector2(3.9792793, 2.3599987)
+
+[node name="NormalGround26" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(3967, -149.99995)
+scale = Vector2(12.279999, 2.3599987)
+
+[node name="NormalGround28" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(3452, 281.00006)
+rotation = -3.1415927
+scale = Vector2(2.0235333, -10.169665)
+
+[node name="NormalGround34" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(4209, -194.99997)
+scale = Vector2(4.6684494, 5.3041267)
+
+[node name="NormalGround27" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(4419.0005, -288.99994)
+scale = Vector2(4.323582, 2.3599987)
+
+[node name="NormalGround35" parent="Terrain/Staircase" instance=ExtResource("3_mofoo")]
+position = Vector2(4865, -341.00003)
+scale = Vector2(4.6684494, 5.3041267)
+
+[node name="Shrine" type="Node2D" parent="Terrain"]
+position = Vector2(0, 59)
+
+[node name="ShatterGround" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(5980, -881)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround2" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6056, -881)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround3" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6132, -881)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround4" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6208, -881)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround5" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6283, -881)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround6" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6359, -881)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround7" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6435, -881)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround8" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6511, -881)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround9" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(5980, -951)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround10" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6056, -951)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround11" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6132, -951)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround12" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6208, -951)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround13" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6283, -951)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround14" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6359, -951)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround15" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6435, -951)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround16" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6511, -951)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround17" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(5980, -1020)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround18" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6056, -1020)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround19" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6132, -1020)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround20" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6208, -1020)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround21" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6283, -1020)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround22" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6359, -1020)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround23" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6435, -1020)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround24" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6511, -1020)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="NormalGround36" parent="Terrain/Shrine" instance=ExtResource("3_mofoo")]
+position = Vector2(7551, -676)
+scale = Vector2(50.30845, 5.3041267)
+
+[node name="NormalGround37" parent="Terrain/Shrine" instance=ExtResource("3_mofoo")]
+position = Vector2(6762, -1381)
+scale = Vector2(25.574215, 10.142263)
+
+[node name="ShatterGround26" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6663, -881)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround27" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6739, -881)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround28" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6815, -881)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround29" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6890, -881)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround30" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6966, -881)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround32" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(7118, -881)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround33" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6587, -951)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround34" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6663, -951)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround36" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6815, -951)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround37" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6890, -951)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround38" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6966, -951)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround39" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(7042, -951)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround40" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(7118, -951)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround41" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6587, -1020)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround42" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6663, -1020)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround43" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6739, -1020)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround44" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6815, -1020)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround45" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(6890, -1020)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround47" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(7042, -1020)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround48" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(7118, -1020)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround31" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(7267, -881)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround35" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(7343, -881)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround49" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(7494, -881)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround51" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(7722, -881)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround52" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(7191, -951)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround54" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(7419, -951)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround55" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(7494, -951)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround56" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(7570, -951)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="ShatterGround60" parent="Terrain/Shrine" instance=ExtResource("4_llcge")]
+position = Vector2(7267, -1020)
+rotation = -3.1415927
+scale = Vector2(3.7573395, 3.5634046)
+
+[node name="NormalGround35" parent="Terrain/Shrine" instance=ExtResource("3_mofoo")]
+position = Vector2(6480, -550)
+scale = Vector2(46.02845, 5.3041267)
+
+[node name="Climb" type="Node2D" parent="Terrain"]
+position = Vector2(2202.855, -137)
+scale = Vector2(0.71, 0.71)
+
+[node name="NormalGround36" parent="Terrain/Climb" instance=ExtResource("3_mofoo")]
+position = Vector2(8958, -1426)
+scale = Vector2(6.36, 18.053)
+
+[node name="NormalGround37" parent="Terrain/Climb" instance=ExtResource("3_mofoo")]
+position = Vector2(8554, -1043)
+scale = Vector2(6.36, 0.9393666)
+
+[node name="NormalGround38" parent="Terrain/Climb" instance=ExtResource("3_mofoo")]
+position = Vector2(8176, -1248.0001)
+scale = Vector2(6.36, 0.9393666)
+
+[node name="NormalGround39" parent="Terrain/Climb" instance=ExtResource("3_mofoo")]
+position = Vector2(8173, -1405.0001)
+scale = Vector2(6.36, 0.9393666)
+
+[node name="NormalGround40" parent="Terrain/Climb" instance=ExtResource("3_mofoo")]
+position = Vector2(7777, -1248.0001)
+scale = Vector2(6.36, 0.9393666)
+
+[node name="NormalGround41" parent="Terrain/Climb" instance=ExtResource("3_mofoo")]
+position = Vector2(7890.345, -1788.7324)
+scale = Vector2(3.4530368, -0.91829056)
+
+[node name="NormalGround42" parent="Terrain/Climb" instance=ExtResource("3_mofoo")]
+position = Vector2(7715.6963, -1598.5916)
+scale = Vector2(4.546489, 0.9393666)
+
+[node name="ShatterGround60" parent="Terrain/Climb" instance=ExtResource("4_llcge")]
+position = Vector2(8355, -1333.0001)
+rotation = 3.1415925
+scale = Vector2(2.4292636, 5.802785)
+
+[node name="NormalGround43" parent="Terrain/Climb" instance=ExtResource("3_mofoo")]
+position = Vector2(8646.683, -1797.1831)
+scale = Vector2(3.4530368, -0.91829056)
+
+[node name="ShatterGround61" parent="Terrain/Climb" instance=ExtResource("4_llcge")]
+position = Vector2(8264.993, -1919.7183)
+rotation = 3.1415925
+scale = Vector2(4.644584, 24.802776)
+
+[node name="NormalGround44" parent="Terrain/Climb" instance=ExtResource("3_mofoo")]
+position = Vector2(7880.486, -2384.507)
+scale = Vector2(13.424867, 8.321147)
+
+[node name="ClingGround2" parent="Terrain/Climb" instance=ExtResource("5_lwi15")]
+position = Vector2(8105.8384, -3308.4507)
+scale = Vector2(20.16001, 65.935)
+
+[node name="ClingGround" parent="Terrain/Climb" instance=ExtResource("5_lwi15")]
+position = Vector2(8956.542, -3430.9858)
+scale = Vector2(20.16001, 143.17444)
+
+[node name="NormalGround45" parent="Terrain/Climb" instance=ExtResource("3_mofoo")]
+position = Vector2(8369.219, -2608.451)
+scale = Vector2(6.326275, 1.2788941)
+
+[node name="NormalGround46" parent="Terrain/Climb" instance=ExtResource("3_mofoo")]
+position = Vector2(8804.43, -2912.676)
+scale = Vector2(6.326275, 1.2788941)
+
+[node name="NormalGround47" parent="Terrain/Climb" instance=ExtResource("3_mofoo")]
+position = Vector2(8104.429, -3964.7888)
+scale = Vector2(6.326275, 1.2788941)
+
+[node name="NormalGround48" parent="Terrain/Climb" instance=ExtResource("3_mofoo")]
+position = Vector2(7703.0205, -3922.5354)
+scale = Vector2(6.326275, 40.0958)
+
+[node name="NormalGround49" parent="Terrain/Climb" instance=ExtResource("3_mofoo")]
+position = Vector2(8369.219, -5152.1133)
+scale = Vector2(35.002335, 10.011292)
+
+[node name="PickaxeObtain" type="Area2D" parent="."]
+position = Vector2(5606, -707)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickaxeObtain"]
+scale = Vector2(0.3223684, 0.39130434)
+shape = SubResource("RectangleShape2D_nr3cb")

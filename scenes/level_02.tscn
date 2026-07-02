@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=3 uid="uid://gjfrkmuom0ee"]
+
+[ext_resource type="Script" uid="uid://dpoh0jqgiqnl6" path="res://scripts/levels/level.gd" id="1_n5em7"]
+[ext_resource type="PackedScene" uid="uid://bqrekrucoblsp" path="res://scenes/player.tscn" id="2_64aqs"]
+[ext_resource type="PackedScene" uid="uid://civ8lbqtyfv5j" path="res://scenes/terrain/bounce_ground.tscn" id="3_b6l7m"]
+[ext_resource type="PackedScene" uid="uid://c1jqshqrv3248" path="res://scenes/terrain/shatter_ground.tscn" id="4_u2tna"]
+[ext_resource type="PackedScene" uid="uid://c0quxs2hblhaa" path="res://scenes/terrain/cling_ground.tscn" id="5_jm0yl"]
+[ext_resource type="PackedScene" uid="uid://lipxhpvx0mvh" path="res://scenes/terrain/hazard.tscn" id="6_ccayl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3qnke"]
+size = Vector2(64, 64)
+
+[sub_resource type="Gradient" id="Gradient_wtsjf"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rnaij"]
+gradient = SubResource("Gradient_wtsjf")
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_n5em7")
+level_name = "test"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(550, 600)
+scale = Vector2(19.2, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_3qnke")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = SubResource("GradientTexture2D_rnaij")
+
+[node name="Player" parent="." instance=ExtResource("2_64aqs")]
+position = Vector2(48, 156)
+
+[node name="BounceGround" parent="." instance=ExtResource("3_b6l7m")]
+position = Vector2(726, 391.00003)
+scale = Vector2(-5.0138507, 18.494284)
+
+[node name="ShatterGround" parent="." instance=ExtResource("4_u2tna")]
+position = Vector2(1060, 356.00003)
+scale = Vector2(1, 7.5599995)
+
+[node name="ClingGround" parent="." instance=ExtResource("5_jm0yl")]
+position = Vector2(924, 405.00003)
+scale = Vector2(8.159999, 16.92)
+
+[node name="Hazard" parent="." instance=ExtResource("6_ccayl")]
+position = Vector2(490, 552)
+scale = Vector2(15.789524, 2.5579917)

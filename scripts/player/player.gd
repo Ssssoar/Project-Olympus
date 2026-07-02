@@ -10,6 +10,7 @@ class_name Player extends CharacterBody2D
 @export var game_over_handler: GameOverHandler
 
 @export var default_params: MovementParams
+@export var can_dash: bool
 
 func _ready() -> void:
 	initialize_movement_handler()

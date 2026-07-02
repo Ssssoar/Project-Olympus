@@ -36,6 +36,7 @@ cling_handler = NodePath("PlayerMovementStateMachine/ClingMovement")
 collision_checker = NodePath("CollisionChecker")
 game_over_handler = NodePath("GameOverHandler")
 default_params = ExtResource("2_qhqgy")
+can_dash = true
 
 [node name="PlayerShape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_h3xc6")
@@ -101,6 +102,9 @@ one_shot = true
 
 [node name="CollisionChecker" type="Node" parent="."]
 script = ExtResource("11_d2wvv")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
 
 [connection signal="bounced" from="PickReactionHandler" to="PlayerMovementStateMachine/WalkMovement" method="_on_pick_reaction_handler_bounced"]
 [connection signal="body_entered" from="PickAreaL" to="PickReactionHandler" method="_on_pick_area_l_body_entered"]

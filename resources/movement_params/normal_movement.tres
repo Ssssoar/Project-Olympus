@@ -1,13 +1,13 @@
-[gd_resource type="Resource" script_class="movement_params" load_steps=2 format=3 uid="uid://m6so55rwfaio"]
+[gd_resource type="Resource" script_class="MovementParams" load_steps=2 format=3 uid="uid://m6so55rwfaio"]
 
 [ext_resource type="Script" uid="uid://dls0m205nrnpc" path="res://resources/movement_params/movement_params.gd" id="1_4gff1"]
 
 [resource]
 script = ExtResource("1_4gff1")
-max_horizontal_speed = 600.0
+max_horizontal_speed = 350.0
 ground_accel = 90.0
 air_accel = 70.0
-ground_drag = 25.0
+ground_drag = 30.0
 air_drag = 10.0
 ground_break_accel = 88.0
 gravity = 45.0
