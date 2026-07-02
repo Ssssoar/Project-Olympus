@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bqrekrucoblsp"]
+[gd_scene load_steps=27 format=3 uid="uid://bqrekrucoblsp"]
 
 [ext_resource type="Script" uid="uid://wy7vtpkatgjx" path="res://scripts/player/movement_handlers/player_movement.gd" id="1_g2els"]
 [ext_resource type="Script" uid="uid://cbsdup0jpvjk7" path="res://scripts/player/player.gd" id="1_qhqgy"]
@@ -11,6 +11,11 @@
 [ext_resource type="Script" uid="uid://b5ko5xxeo3gti" path="res://scripts/player/game_over_handler.gd" id="9_ur7pv"]
 [ext_resource type="PackedScene" uid="uid://yurp3r6v306k" path="res://scenes/particles/death_particle.tscn" id="10_y4r1p"]
 [ext_resource type="Script" uid="uid://byfdmbruxo8a3" path="res://scripts/player/collision_checker.gd" id="11_d2wvv"]
+[ext_resource type="Script" uid="uid://b4vih0bpdblsj" path="res://scripts/debug/movement_switcher.gd" id="12_3v2ag"]
+[ext_resource type="Resource" uid="uid://c82v6lqrd1ll0" path="res://resources/movement_params/floatier_movement.tres" id="13_oprun"]
+[ext_resource type="Resource" uid="uid://c2l4wmk074oib" path="res://resources/movement_params/instant_turnaround.tres" id="14_a8ls1"]
+[ext_resource type="Resource" uid="uid://bbussw00lf2ix" path="res://resources/movement_params/no_air_control.tres" id="15_qfm1y"]
+[ext_resource type="Script" uid="uid://ptyvn2koe35h" path="res://scenes/color_switcher.gd" id="16_a8ls1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h3xc6"]
 
@@ -24,6 +29,30 @@ height = 20
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qlg0r"]
 size = Vector2(4, 26)
+
+[sub_resource type="Gradient" id="Gradient_a8ls1"]
+colors = PackedColorArray(0, 0.7445714, 0, 1, 0, 0.74509805, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qfm1y"]
+gradient = SubResource("Gradient_a8ls1")
+width = 20
+height = 20
+
+[sub_resource type="Gradient" id="Gradient_fulsm"]
+colors = PackedColorArray(0.972549, 1, 1, 1, 0.972549, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4r5pv"]
+gradient = SubResource("Gradient_fulsm")
+width = 20
+height = 20
+
+[sub_resource type="Gradient" id="Gradient_60mlk"]
+colors = PackedColorArray(0.66881514, 0.6719028, 0.6673017, 1, 0.67058825, 0.67058825, 0.6666667, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i4ail"]
+gradient = SubResource("Gradient_60mlk")
+width = 20
+height = 20
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("input_handler", "movement_handler", "pick_handler", "movement_state_machine", "pick_reaction_handler", "cling_handler", "collision_checker", "game_over_handler")]
 script = ExtResource("1_qhqgy")
@@ -105,6 +134,20 @@ script = ExtResource("11_d2wvv")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
+[node name="MovementSwitcher" type="Node" parent="." node_paths=PackedStringArray("move_handler")]
+script = ExtResource("12_3v2ag")
+move_handler = NodePath("../PlayerMovementStateMachine/WalkMovement")
+params1 = ExtResource("2_qhqgy")
+params2 = ExtResource("13_oprun")
+params3 = ExtResource("14_a8ls1")
+params4 = ExtResource("15_qfm1y")
+
+[node name="ColorSwitcher" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("16_a8ls1")
+sprite = NodePath("../Sprite2D")
+normal = SubResource("GradientTexture2D_qfm1y")
+during = SubResource("GradientTexture2D_4r5pv")
+cooldown = SubResource("GradientTexture2D_i4ail")
 
 [connection signal="bounced" from="PickReactionHandler" to="PlayerMovementStateMachine/WalkMovement" method="_on_pick_reaction_handler_bounced"]
 [connection signal="body_entered" from="PickAreaL" to="PickReactionHandler" method="_on_pick_area_l_body_entered"]
@@ -112,7 +155,9 @@ position_smoothing_enabled = true
 [connection signal="player_movement_state_changed" from="PlayerMovementStateMachine" to="PlayerMovementStateMachine/WalkMovement" method="_on_player_movement_state_machine_player_movement_state_changed"]
 [connection signal="player_movement_state_changed" from="PlayerMovementStateMachine" to="PlayerMovementStateMachine/DashMovement" method="_on_player_movement_state_machine_player_movement_state_changed"]
 [connection signal="player_movement_state_changed" from="PlayerMovementStateMachine" to="PlayerMovementStateMachine/ClingMovement" method="_on_player_movement_state_machine_player_movement_state_changed"]
+[connection signal="player_movement_state_changed" from="PlayerMovementStateMachine" to="ColorSwitcher" method="_on_player_movement_state_machine_player_movement_state_changed"]
 [connection signal="timeout" from="PlayerMovementStateMachine/WalkMovement/DashCooldownTimer" to="PlayerMovementStateMachine/WalkMovement" method="_on_dash_cooldown_timer_timeout"]
+[connection signal="timeout" from="PlayerMovementStateMachine/WalkMovement/DashCooldownTimer" to="ColorSwitcher" method="_on_dash_cooldown_timer_timeout"]
 [connection signal="timeout" from="PlayerMovementStateMachine/DashMovement/ImpulseTimer" to="PlayerMovementStateMachine/DashMovement" method="_on_impulse_timer_timeout"]
 [connection signal="dropped" from="PlayerMovementStateMachine/ClingMovement" to="PlayerMovementStateMachine/WalkMovement" method="_on_cling_movement_dropped"]
 [connection signal="jumped" from="PlayerMovementStateMachine/ClingMovement" to="PlayerMovementStateMachine/WalkMovement" method="_on_cling_movement_jumped"]

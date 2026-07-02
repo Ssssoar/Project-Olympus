@@ -34,17 +34,25 @@ texture = SubResource("GradientTexture2D_rnaij")
 position = Vector2(48, 156)
 
 [node name="BounceGround" parent="." instance=ExtResource("2_j8ivh")]
-position = Vector2(726, 391.00003)
+position = Vector2(816.00006, 387)
 scale = Vector2(-5.0138507, 18.494284)
 
 [node name="ShatterGround" parent="." instance=ExtResource("3_nd71p")]
-position = Vector2(1060, 356.00003)
+position = Vector2(340.00006, 151.00002)
 scale = Vector2(1, 7.5599995)
 
 [node name="ClingGround" parent="." instance=ExtResource("4_7ddre")]
-position = Vector2(924, 405.00003)
+position = Vector2(411, 392)
 scale = Vector2(8.159999, 16.92)
 
 [node name="Hazard" parent="." instance=ExtResource("6_3qnke")]
-position = Vector2(490, 552)
+position = Vector2(645, 527)
 scale = Vector2(15.789524, 2.5579917)
+
+[node name="ClingGround2" parent="." instance=ExtResource("4_7ddre")]
+position = Vector2(411, -71.99994)
+scale = Vector2(8.159999, 16.92)
+
+[node name="BounceGround2" parent="." instance=ExtResource("2_j8ivh")]
+position = Vector2(1100, 215.00002)
+scale = Vector2(-5.0138507, 36.214283)

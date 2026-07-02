@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="MovementParams" load_steps=2 format=3 uid="uid://c2l4wmk074oib"]
+
+[ext_resource type="Script" uid="uid://dls0m205nrnpc" path="res://resources/movement_params/movement_params.gd" id="1_ywh01"]
+
+[resource]
+script = ExtResource("1_ywh01")
+max_horizontal_speed = 600.0
+ground_accel = 90.0
+air_accel = 150.0
+ground_drag = 100.0
+air_drag = 100.0
+ground_break_accel = 9000.0
+gravity = 45.0
+jump_force = 1200.0
+fast_gravity = 9000.0
+terminal_velocity = 800.0
+impulse_velocity = 1300.0
+impulse_time = 0.1
+bounce_force = 600.0
+bounce_elevation = 950.0
+metadata/_custom_type_script = "uid://dls0m205nrnpc"
