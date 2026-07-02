@@ -8,9 +8,20 @@ class_name Player extends CharacterBody2D
 @export var cling_handler: ClingMovement
 @export var collision_checker: PlayerCollisionChecker
 @export var game_over_handler: GameOverHandler
+@export var sprite_air: Sprite2D
+@export var sprite_ground: Sprite2D
+@export var texture_air: Texture2D
+@export var texture_ground: Texture2D
 
 @export var default_params: MovementParams
-@export var can_dash: bool
+@export var can_dash: bool: 
+	set(value):
+		can_dash = value
+		if value:
+			if sprite_air != null:
+				sprite_air.texture = texture_air
+			if sprite_ground != null:
+				sprite_ground.texture = texture_ground
 
 func _ready() -> void:
 	initialize_movement_handler()

@@ -1,9 +1,13 @@
-[gd_scene load_steps=27 format=3 uid="uid://bqrekrucoblsp"]
+[gd_scene load_steps=24 format=3 uid="uid://bqrekrucoblsp"]
 
 [ext_resource type="Script" uid="uid://wy7vtpkatgjx" path="res://scripts/player/movement_handlers/player_movement.gd" id="1_g2els"]
 [ext_resource type="Script" uid="uid://cbsdup0jpvjk7" path="res://scripts/player/player.gd" id="1_qhqgy"]
 [ext_resource type="Resource" uid="uid://m6so55rwfaio" path="res://resources/movement_params/normal_movement.tres" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://c5e1m6yr4polw" path="res://assets/Frame 6.png" id="3_4r5pv"]
+[ext_resource type="Texture2D" uid="uid://c45qki202h85x" path="res://assets/Group 12.png" id="3_fulsm"]
 [ext_resource type="Script" uid="uid://byeuv1i152oey" path="res://scripts/player/player_input_process.gd" id="3_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://bcdja6swiw003" path="res://assets/Group 7.png" id="4_4r5pv"]
+[ext_resource type="Texture2D" uid="uid://b84yohddu7lhp" path="res://assets/Frame 7.png" id="4_60mlk"]
 [ext_resource type="Script" uid="uid://bbj3ctwmn2kbm" path="res://scripts/player/movement_handlers/pick_move.gd" id="4_dqkch"]
 [ext_resource type="Script" uid="uid://dn8383bawnrav" path="res://scripts/player/player_movement_state_machine.gd" id="5_fjrip"]
 [ext_resource type="Script" uid="uid://cuecb78rx87k5" path="res://scripts/player/pick_reaction.gd" id="6_tuyoq"]
@@ -15,46 +19,15 @@
 [ext_resource type="Resource" uid="uid://c82v6lqrd1ll0" path="res://resources/movement_params/floatier_movement.tres" id="13_oprun"]
 [ext_resource type="Resource" uid="uid://c2l4wmk074oib" path="res://resources/movement_params/instant_turnaround.tres" id="14_a8ls1"]
 [ext_resource type="Resource" uid="uid://bbussw00lf2ix" path="res://resources/movement_params/no_air_control.tres" id="15_qfm1y"]
-[ext_resource type="Script" uid="uid://ptyvn2koe35h" path="res://scenes/color_switcher.gd" id="16_a8ls1"]
+[ext_resource type="Script" uid="uid://ptyvn2koe35h" path="res://scripts/color_switcher.gd" id="17_fulsm"]
+[ext_resource type="Script" uid="uid://b2tp4c5e2xpxf" path="res://scripts/player/sprite_switcher.gd" id="19_4r5pv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h3xc6"]
-
-[sub_resource type="Gradient" id="Gradient_s36qc"]
-colors = PackedColorArray(0, 0.50980395, 0, 1, 0, 0.50980395, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_6qxox"]
-gradient = SubResource("Gradient_s36qc")
-width = 20
-height = 20
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qlg0r"]
 size = Vector2(4, 26)
 
-[sub_resource type="Gradient" id="Gradient_a8ls1"]
-colors = PackedColorArray(0, 0.7445714, 0, 1, 0, 0.74509805, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_qfm1y"]
-gradient = SubResource("Gradient_a8ls1")
-width = 20
-height = 20
-
-[sub_resource type="Gradient" id="Gradient_fulsm"]
-colors = PackedColorArray(0.972549, 1, 1, 1, 0.972549, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_4r5pv"]
-gradient = SubResource("Gradient_fulsm")
-width = 20
-height = 20
-
-[sub_resource type="Gradient" id="Gradient_60mlk"]
-colors = PackedColorArray(0.66881514, 0.6719028, 0.6673017, 1, 0.67058825, 0.67058825, 0.6666667, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_i4ail"]
-gradient = SubResource("Gradient_60mlk")
-width = 20
-height = 20
-
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("input_handler", "movement_handler", "pick_handler", "movement_state_machine", "pick_reaction_handler", "cling_handler", "collision_checker", "game_over_handler")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("input_handler", "movement_handler", "pick_handler", "movement_state_machine", "pick_reaction_handler", "cling_handler", "collision_checker", "game_over_handler", "sprite_air", "sprite_ground")]
 script = ExtResource("1_qhqgy")
 input_handler = NodePath("PlayerInputProcessor")
 movement_handler = NodePath("PlayerMovementStateMachine/WalkMovement")
@@ -64,14 +37,27 @@ pick_reaction_handler = NodePath("PickReactionHandler")
 cling_handler = NodePath("PlayerMovementStateMachine/ClingMovement")
 collision_checker = NodePath("CollisionChecker")
 game_over_handler = NodePath("GameOverHandler")
+sprite_air = NodePath("Flippable/Air")
+sprite_ground = NodePath("Flippable/Ground")
+texture_air = ExtResource("3_fulsm")
+texture_ground = ExtResource("4_4r5pv")
 default_params = ExtResource("2_qhqgy")
 can_dash = true
 
+[node name="Flippable" type="Node2D" parent="."]
+
+[node name="Air" type="Sprite2D" parent="Flippable"]
+position = Vector2(-15, -22)
+scale = Vector2(0.323, 0.323)
+texture = ExtResource("3_4r5pv")
+
+[node name="Ground" type="Sprite2D" parent="Flippable"]
+position = Vector2(-15, -22)
+scale = Vector2(0.32323185, 0.32323185)
+texture = ExtResource("4_60mlk")
+
 [node name="PlayerShape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_h3xc6")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("GradientTexture2D_6qxox")
 
 [node name="PlayerInputProcessor" type="Node" parent="."]
 script = ExtResource("3_qhqgy")
@@ -98,8 +84,9 @@ shape = SubResource("RectangleShape2D_qlg0r")
 script = ExtResource("5_fjrip")
 metadata/_custom_type_script = "uid://dn8383bawnrav"
 
-[node name="WalkMovement" type="Node" parent="PlayerMovementStateMachine" node_paths=PackedStringArray("impulse_cooldown_timer")]
+[node name="WalkMovement" type="Node" parent="PlayerMovementStateMachine" node_paths=PackedStringArray("flippable", "impulse_cooldown_timer")]
 script = ExtResource("1_g2els")
+flippable = NodePath("../../Flippable")
 impulse_cooldown_timer = NodePath("DashCooldownTimer")
 dash_cooldown_time = 0.5
 metadata/_custom_type_script = "uid://wy7vtpkatgjx"
@@ -134,6 +121,7 @@ script = ExtResource("11_d2wvv")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
+
 [node name="MovementSwitcher" type="Node" parent="." node_paths=PackedStringArray("move_handler")]
 script = ExtResource("12_3v2ag")
 move_handler = NodePath("../PlayerMovementStateMachine/WalkMovement")
@@ -142,12 +130,19 @@ params2 = ExtResource("13_oprun")
 params3 = ExtResource("14_a8ls1")
 params4 = ExtResource("15_qfm1y")
 
-[node name="ColorSwitcher" type="Node" parent="." node_paths=PackedStringArray("sprite")]
-script = ExtResource("16_a8ls1")
-sprite = NodePath("../Sprite2D")
-normal = SubResource("GradientTexture2D_qfm1y")
-during = SubResource("GradientTexture2D_4r5pv")
-cooldown = SubResource("GradientTexture2D_i4ail")
+[node name="ColorSwitcher" type="Node" parent="." node_paths=PackedStringArray("sprite", "sprite2")]
+script = ExtResource("17_fulsm")
+sprite = NodePath("../Flippable/Air")
+sprite2 = NodePath("../Flippable/Ground")
+normal = Color(1, 1, 1, 1)
+during = Color(0.9931932, 0.65586835, 0.57197165, 1)
+cooldown = Color(0.73719263, 0.73719305, 0.73719275, 1)
+
+[node name="SpriteSwitcher" type="Node" parent="." node_paths=PackedStringArray("player", "air_sprite", "ground_sprite")]
+script = ExtResource("19_4r5pv")
+player = NodePath("..")
+air_sprite = NodePath("../Flippable/Air")
+ground_sprite = NodePath("../Flippable/Ground")
 
 [connection signal="bounced" from="PickReactionHandler" to="PlayerMovementStateMachine/WalkMovement" method="_on_pick_reaction_handler_bounced"]
 [connection signal="body_entered" from="PickAreaL" to="PickReactionHandler" method="_on_pick_area_l_body_entered"]
